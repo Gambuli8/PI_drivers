@@ -1,6 +1,8 @@
 const {
   getAllDriver,
   getDriverByNameDB,
+  newDriverDB,
+  getTeams,
 } = require("../Controllers/getDrivers");
 
 //params /Drivers/ =>
@@ -25,13 +27,45 @@ const getDriversByNameH = async (req, res) => {
   }
 };
 
-//body
-const postDriversH = async (req, res) => {};
-const getAllTeamsH = async (req, res) => {};
+//body lo que lleva por inputs
+const postDriversH = async (req, res) => {
+  const {
+    Nombre,
+    Apellido,
+    Nacionalidad,
+    Imagen,
+    Fecha_de_Nacimiento,
+    Descripcion,
+    Escuderias,
+  } = req.body;
+  try {
+    const newDriver = await newDriverDB({
+      Nombre,
+      Apellido,
+      Nacionalidad,
+      Imagen,
+      Fecha_de_Nacimiento,
+      Descripcion,
+      Escuderias,
+    });
+    res.status(200).json(newDriver);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
+
+const getAllTeamsH = async (req, res) => {
+  try {
+    const Teams = await getTeams();
+    return res.status(200).json(Teams);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
 
 module.exports = {
   getAllDriversH,
-  getAllTeamsH,
   getDriversByNameH,
   postDriversH,
+  getAllTeamsH,
 };

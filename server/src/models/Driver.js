@@ -11,30 +11,30 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      name: {
+      Nombre: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      lastname: {
+      Apellido: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      descripcion: {
+      Descripcion: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      imagen: {
+      Imagen: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           isUrl: true,
         },
       },
-      nacionalidad: {
+      Nacionalidad: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      fecha_de_nacimiento: {
+      Fecha_de_Nacimiento: {
         type: DataTypes.STRING,
         allowNull: false,
       },

@@ -1,4 +1,4 @@
-const { Driver } = require("../db");
+const { Driver, Team } = require("../db");
 const axios = require("axios");
 
 const getAllDriver = async () => {
@@ -9,12 +9,13 @@ const getAllDriver = async () => {
       id: driver.id,
       Apodo: driver.driverRef,
       Abrebiacion: driver.code,
-      numero: driver.number,
-      name: driver.name,
-      imagen: driver.image.url,
-      fecha_de_nacimiento: driver.dob,
-      nacionalidad: driver.nationality,
-      descripcion: driver.description,
+      Numero: driver.number,
+      Nombre: driver.name,
+      Fecha_de_Nacimiento: driver.dob,
+      Nacionalidad: driver.nationality,
+      Escuderias: driver.teams,
+      Imagen: driver.image.url,
+      Descripcion: driver.description,
     };
   });
 
@@ -37,13 +38,13 @@ const getDriverByNameDB = async (name) => {
         id: driver.id,
         Apodo: driver.driverRef,
         Abrebiacion: driver.code,
-        numero: driver.number,
-        nombre: driver.name,
-        imagen: driver.image.url,
-        fecha_de_nacimiento: driver.dob,
-        nacionalidad: driver.nationality,
-        teams: driver.teams,
-        descripcion: driver.description,
+        Numero: driver.number,
+        Nombre: driver.name,
+        Imagen: driver.image.url,
+        Fecha_de_Nacimiento: driver.dob,
+        Nacionalidad: driver.nationality,
+        Escuderias: driver.teams,
+        Descripcion: driver.description,
       };
     });
     const response = [...driverDB, ...DriversFilter];
@@ -51,7 +52,48 @@ const getDriverByNameDB = async (name) => {
   }
 };
 
+const newDriverDB = async (
+  Nombre,
+  Apellido,
+  Nacionalidad,
+  Imagen,
+  Fecha_de_Nacimiento,
+  Descripcion,
+  Escuderias
+) => {
+  const newDriver = await Driver.create({
+    Nombre,
+    Apellido,
+    Nacionalidad,
+    Imagen,
+    Fecha_de_Nacimiento,
+    Descripcion,
+    Escuderias,
+  });
+  const teamsDb = await Team.findAll();
+  await newDriver.addTeams(teamsDb);
+  return newDriver;
+};
+
+const getTeams = async () => {
+  const TeamsApi = await axios.get("http://localhost:5000/drivers");
+  const TeamsApiFilter = TeamsApi.data.map((driver) => {
+    return driver.teams ? driver.teams.split(", ") : [];
+  });
+  const response = [...TeamsApiFilter];
+  const responseSet = new Set(response.flat());
+  responseSet.forEach(async (driver) => {
+    await Team.findOrCreate({
+      where: {
+        name: driver,
+      },
+    });
+  });
+};
+
 module.exports = {
   getAllDriver,
   getDriverByNameDB,
+  newDriverDB,
+  getTeams,
 };
