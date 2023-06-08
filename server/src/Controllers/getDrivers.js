@@ -10,7 +10,8 @@ const getAllDriver = async () => {
       Apodo: driver.driverRef,
       Abrebiacion: driver.code,
       Numero: driver.number,
-      Nombre: driver.name,
+      Nombre: driver.name.forename,
+      Apellido: driver.name.surname,
       Fecha_de_Nacimiento: driver.dob,
       Nacionalidad: driver.nationality,
       Escuderias: driver.teams,
@@ -27,7 +28,7 @@ const getDriverByNameDB = async (name) => {
   if (name) {
     const driverDB = await Driver.findAll({
       where: {
-        name,
+        name: name,
       },
     });
     const DriversApi = await axios.get(
@@ -39,7 +40,8 @@ const getDriverByNameDB = async (name) => {
         Apodo: driver.driverRef,
         Abrebiacion: driver.code,
         Numero: driver.number,
-        Nombre: driver.name,
+        Nombre: driver.name.forename,
+        Apellido: driver.name.surname,
         Imagen: driver.image.url,
         Fecha_de_Nacimiento: driver.dob,
         Nacionalidad: driver.nationality,
@@ -53,42 +55,46 @@ const getDriverByNameDB = async (name) => {
 };
 
 const newDriverDB = async (
-  Nombre,
-  Apellido,
-  Nacionalidad,
-  Imagen,
-  Fecha_de_Nacimiento,
-  Descripcion,
-  Escuderias
+  name,
+  lastName,
+  nacionality,
+  image,
+  dob,
+  description
 ) => {
   const newDriver = await Driver.create({
-    Nombre,
-    Apellido,
-    Nacionalidad,
-    Imagen,
-    Fecha_de_Nacimiento,
-    Descripcion,
-    Escuderias,
+    name,
+    lastName,
+    nacionality,
+    image,
+    dob,
+    description,
   });
-  const teamsDb = await Team.findAll();
-  await newDriver.addTeams(teamsDb);
+  const teamDb = Team.findAll();
+  await newDriver.addTeam(teamDb);
   return newDriver;
 };
 
 const getTeams = async () => {
   const TeamsApi = await axios.get("http://localhost:5000/drivers");
   const TeamsApiFilter = TeamsApi.data.map((driver) => {
-    return driver.teams ? driver.teams.split(", ") : [];
+    return driver.teams ? driver.teams.split(",") : [];
   });
   const response = [...TeamsApiFilter];
-  const responseSet = new Set(response.flat());
-  responseSet.forEach(async (driver) => {
+  const response2 = response.flat();
+  const result = response2.filter((team, index) => {
+    return response2.indexOf(team.trim()) === index;
+  });
+  result.forEach(async (team) => {
     await Team.findOrCreate({
       where: {
-        name: driver,
+        name: team,
       },
     });
   });
+  const teamDB = await Team.findAll();
+  const teamMap = teamDB.map((team) => team.name);
+  return teamMap;
 };
 
 module.exports = {

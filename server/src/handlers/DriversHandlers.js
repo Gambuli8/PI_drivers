@@ -18,37 +18,19 @@ const getAllDriversH = async (req, res) => {
 const getDriversByNameH = async (req, res) => {
   const { name } = req.query;
   try {
-    if (name) {
-      const allDriverName = await getDriverByNameDB(name);
-      res.status(200).json(allDriverName);
-    }
+    const allDriverName = await getDriverByNameDB(name);
+    res.status(200).json(allDriverName);
   } catch (error) {
-    res.status(400).json("No se encontro ningun Piloto con ese nombre");
+    res.status(400).json(error.message);
   }
 };
 
 //body lo que lleva por inputs
 const postDriversH = async (req, res) => {
-  const {
-    Nombre,
-    Apellido,
-    Nacionalidad,
-    Imagen,
-    Fecha_de_Nacimiento,
-    Descripcion,
-    Escuderias,
-  } = req.body;
+  const { name, lastName, nacionality, image, dob, description } = req.body;
   try {
-    const newDriver = await newDriverDB({
-      Nombre,
-      Apellido,
-      Nacionalidad,
-      Imagen,
-      Fecha_de_Nacimiento,
-      Descripcion,
-      Escuderias,
-    });
-    res.status(200).json(newDriver);
+    await newDriverDB(name, lastName, nacionality, image, dob, description);
+    res.status(200).send("Creado con exitos");
   } catch (error) {
     res.status(400).json(error.message);
   }
