@@ -1,0 +1,32 @@
+.navbar{
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
+    background-color: #330867;
+}
+
+.navbar_links{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 34%;
+    list-style: none;
+}
+
+.navbar_link{
+    text-decoration: none;
+    color: #8c70c1;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 2rem;
+}
+
+.navbar_link:hover{
+    color: #fff;
+    filter: drop-shadow(0 0 0.75rem #965eff);
+}
