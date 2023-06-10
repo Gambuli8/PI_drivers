@@ -4,7 +4,9 @@
     align-items: center;
     justify-content: center;
     padding: 0 2rem;
-    background-color: #330867;
+    background-color: transparent;
+    margin-bottom: 30px;
+    padding-top: 25px;
 }
 
 .navbar_links{
@@ -17,8 +19,8 @@
 
 .navbar_link{
     text-decoration: none;
-    color: #8c70c1;
-    font-size: 1.2rem;
+    color: #ff0000;
+    font-size: 1.4rem;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
     cursor: pointer;

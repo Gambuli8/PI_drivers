@@ -1,21 +1,24 @@
 import { React, useState } from 'react';
 import style from './create.module.css';
-import { useDispatch } from 'react-redux';
-import { PostNewDriver } from '../../redux/Actions/Acrions';
+import { useDispatch, useSelector } from 'react-redux';
+import { PostNewDriver } from '../../redux/Actions/Actions';
+import { Link } from 'react-router-dom';
 
 const Create = () => {
 
   const dispatch = useDispatch();
 
+  const allTeams = useSelector((state) => state.allTeams);
+
   //!ESTADOS
   const [input, setInput] = useState({
-    name: '',
-    lastName: '',
-    nacionality: '',
-    image: '',
-    dob:'',
-    description: '',
-    teams: {},
+    Nombre: '',
+    Apellido: '',
+    Nacionalidad: '',
+    Imagen: '',
+    Fecha_de_Nacimiento:'',
+    Descripcion: '',
+    Escuderias: {},
   });
 
 
@@ -39,18 +42,18 @@ const Create = () => {
   };
 
   const [Errors, setErrors] = useState({
-    name: '',
-    lastName: '',
-    nacionality: '',
-    dob: '',
-    image: '',
-    description: '',
-    teams: '',
+    Nombre: '',
+    Apellido: '',
+    Nacionalidad: '',
+    Imagen: '',
+    Fecha_de_Nacimiento:'',
+    Descripcion: '',
+    Escuderias: '',
   })
 
   //! VALIDACIONES
   const validate = (input, name) => {
-    if(name === 'name') {
+    if(name === 'Nombre') {
       if (input.name !== '') {
         setErrors({
         ...Errors,
@@ -64,7 +67,7 @@ const Create = () => {
       };
       return;
     };
-    if(name === 'lastName') {
+    if(name === 'Apellido') {
       if (input.name !== '') {
         setErrors({
         ...Errors,
@@ -78,7 +81,7 @@ const Create = () => {
       };
       return;
     };
-    if(name === 'nacionality') {
+    if(name === 'Nacionalidad') {
       if (input.name !== '') {
         setErrors({
         ...Errors,
@@ -92,7 +95,7 @@ const Create = () => {
       };
       return;
     };
-    if(name === 'dob') {
+    if(name === 'Fecha_de_Nacimiento') {
       if (input.name !== '') {
         setErrors({
         ...Errors,
@@ -106,7 +109,7 @@ const Create = () => {
       };
       return;
     };
-    if(name === 'image') {
+    if(name === 'Imagen') {
       if (input.name !== '') {
         setErrors({
         ...Errors,
@@ -120,7 +123,7 @@ const Create = () => {
       };
       return;
     };
-    if(name === 'description') {
+    if(name === 'Descripcion') {
       if (input.name !== '') {
         setErrors({
         ...Errors,
@@ -134,7 +137,7 @@ const Create = () => {
       };
       return;
     };
-    if(name === 'teams') {
+    if(name === 'Escuderias') {
       if (input.name !== '') {
         setErrors({
         ...Errors,
@@ -152,44 +155,46 @@ const Create = () => {
 
 
   return (
-    <div>
-      <form onSubmit={handlerSubmit}>
-        <div className={style.container}>
+      <div>
+      <Link to="/home"><button className={style.btnHome}>Volver</button></Link>
+    <div className={style.form_container}>
+      <h1>Crear Piloto</h1>
+      <form onSubmit={handlerSubmit} className={style.container}>
+        <div className={style.inputs}>
           <label>Nombre:</label>
-          <input type="text" name='name' onChange={handlerChange}placeholder={Errors.name}/>
+          <input type="text" name='Nombre' onChange={handlerChange}placeholder={Errors.Nombre}/>
         </div>
         <div>
           <label>Apellido:</label>
-          <input type="text" name='lastName' onChange={handlerChange}placeholder={Errors.lastName}/>
+          <input type="text" name='Apellido' onChange={handlerChange}placeholder={Errors.Apellido}/>
         </div>
         <div>
           <label>Nacionalidad:</label>
-          <input type="text" name='nacionality' onChange={handlerChange}placeholder={Errors.nacionality}/>
+          <input type="text" name='Nacionalidad' onChange={handlerChange}placeholder={Errors.Nacionalidad}/>
         </div>
         <div>
           <label>Imagen:</label>
-          <input type="url" name='image' onChange={handlerChange}placeholder={Errors.image}/>
+          <input type="url" name='Imagen' onChange={handlerChange}placeholder={Errors.Imagen}/>
         </div>
         <div>
           <label>Fecha de nacimineto:</label>
-          <input type="date" name='dob' onChange={handlerChange}placeholder={Errors.dob}/>
+          <input type="date" name='Fecha_de_Nacimiento' onChange={handlerChange}placeholder={Errors.Fecha_de_Nacimiento}/>
         </div>
         <div>
           <label>Desscripcion</label>
-          <input type="text" name='description' onChange={handlerChange}placeholder={Errors.description}/>
+          <input type="text" name='Descripcion' onChange={handlerChange}placeholder={Errors.Descripcion}/>
         </div>
         <div>
           <label>Escuderias</label>
-          <select name="teams" onChange={handlerChange}>
-            <option value="0">Escuderias</option>
-            <option value="Mercedes">Mercedes</option>
-            <option value="RedBull">RedBull</option>
-            <option value="Mclaren">Mclaren</option>
-            <option value="Ferrari">Ferrari</option>
-          </select>
+          <div className={style.checkbox}>
+          {allTeams.forEach((team) => {
+            <input type="checkbox" value={team}/>
+          })}
+          </div>
         </div>
-      <button type='submit' name='submit'>Crear</button>
       </form>
+      <button className={style.button_submit} type='submit' name='submit'>Crear</button>
+    </div>
     </div>
   )
 }

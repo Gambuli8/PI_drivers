@@ -1,4 +1,14 @@
+*{
+   margin: 0px;
+   padding: 0px;
+   box-sizing: border-box;
+}
+
 .container{
-    background-color: gray;
-    height: 1900px;
+   background-image: url(https://images7.alphacoders.com/121/1213891.jpg);
+   object-fit: cover;
+   height: 100%;
+   width: 100%;
+   position: relative;
+   margin-top: 0px;
 }

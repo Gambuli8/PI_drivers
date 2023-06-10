@@ -3,34 +3,27 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 280px;
-    height: 394px;
+    width: 300px;
+    height: 450px;
     border: 1px solid black;
-    border-radius: 20px;
-    background-color: black;
+    border-radius: 30px;
+    background-color: #212121;
     color: white;
     position: relative;
     transition: 0.5s ease-out;
     padding: 10px;
+    box-shadow: 15px 15px 30px rgb(25, 25, 25),
+    -15px -15px 30px rgb(60, 60, 60);
 }
 .card_detail .info{
-    font-size: 1.2rem;
-    margin: 5px;
-    font-weight: bold;
-    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: lighter;
 }
 
 .card_container:hover{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #ae0404;
-    border-color: #ae0404;
-    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
-    transform: translateY(-15px);
 }
 
 .button{
@@ -59,9 +52,8 @@
 .card_detail{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    color: black;
+    justify-content: center;
+    height: 90%;
 }
 
 .img{

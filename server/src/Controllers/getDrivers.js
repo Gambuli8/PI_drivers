@@ -55,20 +55,20 @@ const getDriverByNameDB = async (name) => {
 };
 
 const newDriverDB = async (
-  name,
-  lastName,
-  nacionality,
-  image,
-  dob,
-  description
+  Nombre,
+  Apellido,
+  Nacionalidad,
+  Imagen,
+  Fecha_de_Nacimiento,
+  Descripcion
 ) => {
   const newDriver = await Driver.create({
-    name,
-    lastName,
-    nacionality,
-    image,
-    dob,
-    description,
+    Nombre,
+    Apellido,
+    Nacionalidad,
+    Imagen,
+    Fecha_de_Nacimiento,
+    Descripcion,
   });
   const teamDb = Team.findAll();
   await newDriver.addTeam(teamDb);

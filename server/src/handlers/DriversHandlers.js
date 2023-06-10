@@ -27,9 +27,23 @@ const getDriversByNameH = async (req, res) => {
 
 //body lo que lleva por inputs
 const postDriversH = async (req, res) => {
-  const { name, lastName, nacionality, image, dob, description } = req.body;
+  const {
+    Nombre,
+    Apellido,
+    Nacionalidad,
+    Imagen,
+    Fecha_de_Nacimiento,
+    Descripcion,
+  } = req.body;
   try {
-    await newDriverDB(name, lastName, nacionality, image, dob, description);
+    await newDriverDB(
+      Nombre,
+      Apellido,
+      Nacionalidad,
+      Imagen,
+      Fecha_de_Nacimiento,
+      Descripcion
+    );
     res.status(200).send("Creado con exitos");
   } catch (error) {
     res.status(400).json(error.message);

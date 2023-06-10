@@ -5,20 +5,21 @@ import { useSelector } from 'react-redux';
 
 function Cards() {
 
-  const AllDrivers = useSelector((state) => state.allDrivers)
+  const allDrivers = useSelector((state) => state.allDrivers);
+
   return (
     <div className={style.cards_container}>
-      {console.log(AllDrivers)}
         <div className={style.Cards}>
-          { AllDrivers.map((driver) => (
+          { allDrivers.map((driver) => (
             <Card
+            key={driver.id}
             id= {driver.id}
             name= {driver.Nombre}
             lastName= {driver.Apellido}
-            nacionality= {driver.nacionalidad}
+            nacionality= {driver.Nacionalidad}
             dob= {driver.Fecha_de_nacimiento}
             image={driver.Imagen}
-            description= {driver.descripcion}
+            description= {driver.Descripcion}
             teams= {driver.Escuderias}
             />
           ))

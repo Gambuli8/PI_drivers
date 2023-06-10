@@ -5,14 +5,15 @@ export const GET_ALL_DRIVERS = "GET_ALL_DRIVERS";
 export const GET_ALL_TEAMS = "GET_ALL_TEAMS";
 export const GET_NEW_DRIVER = "GET_NEW_DRIVER";
 export const GET_DRIVER_BY_NAME = "GET_DRIVER_BY_NAME";
+export const FILTERS = "FILTERS";
 
 //* ACTIONS
 
 export const GetAllDrivers = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/drivers/`);
-      return dispatch({ type: GET_ALL_DRIVERS, payload: response.data });
+      const response = await axios.get(`http://localhost:3001/drivers`);
+      dispatch({ type: GET_ALL_DRIVERS, payload: response.data });
     } catch (error) {
       alert(error.response.data);
     }
@@ -22,8 +23,8 @@ export const GetAllDrivers = () => {
 export const GetAllTeams = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/teams/`);
-      return dispatch({ type: GET_ALL_TEAMS, payload: response.data });
+      const response = await axios.get(`http://localhost:3001/teams`);
+      dispatch({ type: GET_ALL_TEAMS, payload: response.data });
     } catch (error) {
       alert(error.response.data);
     }
@@ -49,6 +50,18 @@ export const GetDriverByName = (name) => {
         `http://localhost:3001/drivers/search/${name}`
       );
       dispatch({ type: GET_DRIVER_BY_NAME, payload: response.data });
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+};
+
+//* FILTROS
+
+export const FilterOrd = (orden) => {
+  return function (dispatch) {
+    try {
+      dispatch({ type: FILTERS, payload: orden });
     } catch (error) {
       alert(error.response.data);
     }
