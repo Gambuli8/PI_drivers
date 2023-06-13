@@ -5,10 +5,10 @@
 }
 
 .container{
-   background-image: url(https://images7.alphacoders.com/121/1213891.jpg);
+   background-image: url(https://img.freepik.com/vector-premium/fondo-industrial-carbono-negro_79145-253.jpg);
    object-fit: cover;
+   position: relative;
+   margin: 0px;
    height: 100%;
    width: 100%;
-   position: relative;
-   margin-top: 0px;
 }

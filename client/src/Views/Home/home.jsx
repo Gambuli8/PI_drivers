@@ -1,34 +1,39 @@
 import React, { useEffect } from 'react'
 import NavBar from '../../components/NavBar/navbar';
 import Cards from '../../components/Cards/cards';
-import { GetAllDrivers } from '../../redux/Actions/Actions';
+import { GetAllDrivers, Filter } from '../../redux/Actions/Actions';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './home.module.css';
 import Filters from '../../components/Filters/filters';
+
+
+
 function Home() {
+
   const dispatch = useDispatch();
-  const filters = useSelector((state) => state.filters);
-  const driverFilters = useSelector((state) => state.driverFilters);
   const allDrivers = useSelector((state) => state.allDrivers);
+  const driverFilters = useSelector((state) => state.driverFilters);
+  const filters = useSelector((state) => state.filters);
 
   useEffect(() =>{
     dispatch(GetAllDrivers())
   }, [])
 
 
-
   return (
-    <div>
+    <div className={style.container}>
     {allDrivers.length ? (
-      <div className={style.container}>
+      <div>
       <NavBar />
-      <Filters  />
-      {filters? <Cards allDrivers={driverFilters}/> : <Cards allDrivers={driverFilters}/>}
+      <Filters/>
+      <br />
+      <br />
+      {filters? <Cards allDrivers={driverFilters}/> : <Cards allDrivers={allDrivers}/>}
       </div>
       ) : (
           <h3 className={style.loading}>Loading...</h3>
       )}
-        </div>
+    </div>
   )
 }
 

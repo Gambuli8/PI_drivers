@@ -3,7 +3,9 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 1100px;
+    height: 100%;
+    margin: 0px;
+    padding: 60px;
 }
 
 
@@ -15,4 +17,8 @@
     justify-content: center;
     align-items: center;
     gap: 8rem;
+}
+
+.Paginado{
+    margin: 20px;
 }

@@ -1,14 +1,19 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import style from './create.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { PostNewDriver } from '../../redux/Actions/Actions';
+import { PostNewDriver, GetAllTeams } from '../../redux/Actions/Actions';
 import { Link } from 'react-router-dom';
 
 const Create = () => {
 
   const dispatch = useDispatch();
-
   const allTeams = useSelector((state) => state.allTeams);
+  const allDrivers3 = new Set(allTeams.flat());
+  const allDrivers4 = [...allDrivers3];
+
+  useEffect(() =>{
+    dispatch(GetAllTeams())
+  }, [])
 
   //!ESTADOS
   const [input, setInput] = useState({
@@ -156,44 +161,45 @@ const Create = () => {
 
   return (
       <div>
+        {/* {console.log(allDrivers4)} */}
       <Link to="/home"><button className={style.btnHome}>Volver</button></Link>
     <div className={style.form_container}>
       <h1>Crear Piloto</h1>
       <form onSubmit={handlerSubmit} className={style.container}>
         <div className={style.inputs}>
+          <div className={style.inputdiv}>
           <label>Nombre:</label>
           <input type="text" name='Nombre' onChange={handlerChange}placeholder={Errors.Nombre}/>
         </div>
-        <div>
+        <div className={style.inputdiv}>
           <label>Apellido:</label>
           <input type="text" name='Apellido' onChange={handlerChange}placeholder={Errors.Apellido}/>
         </div>
-        <div>
+        <div className={style.inputdiv}>
           <label>Nacionalidad:</label>
           <input type="text" name='Nacionalidad' onChange={handlerChange}placeholder={Errors.Nacionalidad}/>
         </div>
-        <div>
+        <div className={style.inputdiv}>
           <label>Imagen:</label>
           <input type="url" name='Imagen' onChange={handlerChange}placeholder={Errors.Imagen}/>
         </div>
-        <div>
+        <div className={style.inputdiv}>
           <label>Fecha de nacimineto:</label>
           <input type="date" name='Fecha_de_Nacimiento' onChange={handlerChange}placeholder={Errors.Fecha_de_Nacimiento}/>
         </div>
-        <div>
+        <div className={style.inputdiv}>
           <label>Desscripcion</label>
           <input type="text" name='Descripcion' onChange={handlerChange}placeholder={Errors.Descripcion}/>
         </div>
-        <div>
-          <label>Escuderias</label>
-          <div className={style.checkbox}>
-          {allTeams.forEach((team) => {
-            <input type="checkbox" value={team}/>
-          })}
-          </div>
         </div>
-      </form>
+          <label>Escuderias</label>
+        <div className={style.divteams}>
+          {allDrivers4.map((team) => {
+             <input type="checkbox" value={team}/>
+          })}
+        </div>
       <button className={style.button_submit} type='submit' name='submit'>Crear</button>
+      </form>
     </div>
     </div>
   )

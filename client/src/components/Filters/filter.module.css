@@ -1,0 +1,33 @@
+.container_filtros{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 0 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    border: none;
+}
+
+.select{
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    background-color: #ff0000;
+}
+
+.opciones{
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #002fd8;
+    border-radius: 5px;
+    background-color: #002fd8;
+}
