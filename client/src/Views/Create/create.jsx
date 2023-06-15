@@ -161,7 +161,7 @@ const Create = () => {
 
   return (
       <div>
-        {/* {console.log(allDrivers4)} */}
+        {console.log(allDrivers4)}
       <Link to="/home"><button className={style.btnHome}>Volver</button></Link>
     <div className={style.form_container}>
       <h1>Crear Piloto</h1>

@@ -18,9 +18,12 @@ const getAllDriversH = async (req, res) => {
 const getDriversByNameH = async (req, res) => {
   const { name } = req.query;
   try {
-    const allDriverName = await getDriverByNameDB(name);
-    res.status(200).json(allDriverName);
+    if (name) {
+      const allDriverName = await getDriverByNameDB(name);
+      res.status(200).json(allDriverName);
+    }
   } catch (error) {
+    alert(error.message);
     res.status(400).json(error.message);
   }
 };

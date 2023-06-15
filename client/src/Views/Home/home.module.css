@@ -12,3 +12,25 @@
    height: 100%;
    width: 100%;
 }
+
+.loading{
+   text-align: center;
+   font-size: 40px;
+   color: white;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+   margin: 0px;
+   height: 100%;
+   width: 100%;
+}
+
+html{
+   background-image: url(https://img.freepik.com/vector-premium/fondo-industrial-carbono-negro_79145-253.jpg);
+   object-fit: cover;
+   position: relative;
+   margin: 0px;
+   height: 100%;
+   width: 100%;
+}

@@ -7,7 +7,6 @@ import style from './home.module.css';
 import Filters from '../../components/Filters/filters';
 
 
-
 function Home() {
 
   const dispatch = useDispatch();
@@ -23,16 +22,16 @@ function Home() {
   return (
     <div className={style.container}>
     {allDrivers.length ? (
-      <div>
-      <NavBar />
-      <Filters/>
-      <br />
-      <br />
-      {filters? <Cards allDrivers={driverFilters}/> : <Cards allDrivers={allDrivers}/>}
-      </div>
-      ) : (
+        <div>
+        <NavBar />
+        <Filters/>
+        <br />
+        <br />
+        {filters? <Cards allDrivers={driverFilters}/> : <Cards allDrivers={allDrivers}/>}
+        </div>
+        ) : (
           <h3 className={style.loading}>Loading...</h3>
-      )}
+          )}
     </div>
   )
 }

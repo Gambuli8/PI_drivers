@@ -28,11 +28,11 @@ const getDriverByNameDB = async (name) => {
   if (name) {
     const driverDB = await Driver.findAll({
       where: {
-        name: name,
+        Nombre: name,
       },
     });
     const DriversApi = await axios.get(
-      ` http://localhost:5000/drivers?name.surname=${name}`
+      ` http://localhost:5000/drivers?name.forename=${name}`
     );
     const DriversFilter = DriversApi.data.map((driver) => {
       return {

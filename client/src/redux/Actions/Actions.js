@@ -46,11 +46,11 @@ export const PostNewDriver = (info) => {
   };
 };
 
-export const GetDriverByName = (name) => {
+export const GetDriverByName = (Nombre) => {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/drivers/search/${name}`
+        `http://localhost:3001/drivers/search?name=${Nombre}`
       );
       dispatch({ type: GET_DRIVER_BY_NAME, payload: response.data });
     } catch (error) {

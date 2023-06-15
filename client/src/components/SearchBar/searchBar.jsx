@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './searchBar.module.css';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { GetDriverByName } from '../../redux/Actions/Actions';
 
@@ -10,6 +9,10 @@ function Searchbar() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(GetDriverByName(name));
+  }, []);
 
   const handlerinputChange = (e) => {
     e.preventDefault();
@@ -25,15 +28,15 @@ function Searchbar() {
     }
   };
 
-
-
   return (
     <div className={style.container}>
+      {/* {console.log(name)} */}
     <div className={style.input_group}>
-        <input placeholder='Buscar...' onChange={e => handlerinputChange(e)} type="text" name='text' className={style.input} autoComplete='off' value={name} />
+        <input onChange={(e) => handlerinputChange(e)} placeholder='Buscar...' type="text" name='text' className={style.input} autoComplete='off' value={name} />
     </div>
-        <button type="submit" className={style.button} onClick={e => handlerSubmit(e)}>Buscar</button>
+        <button type="submit" onClick={handlerSubmit} className={style.button}>Buscar</button>
     </div>
+
   )
 }
 
