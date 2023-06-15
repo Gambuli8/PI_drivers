@@ -1,11 +1,13 @@
 .cards_container{
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
     margin: 0px;
-    padding: 60px;
+    padding: 10px;
+    padding-bottom: 60px;
 }
 
 
@@ -20,5 +22,5 @@
 }
 
 .Paginado{
-    margin: 20px;
+    margin: 0px;
 }

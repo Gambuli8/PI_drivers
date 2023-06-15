@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../../components/NavBar/navbar';
 import Cards from '../../components/Cards/cards';
+import Card from '../../components/Card/card';
 import { GetAllDrivers, Filter } from '../../redux/Actions/Actions';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './home.module.css';
@@ -23,10 +24,8 @@ function Home() {
     <div className={style.container}>
     {allDrivers.length ? (
         <div>
-        <NavBar />
+        <NavBar/>
         <Filters/>
-        <br />
-        <br />
         {filters? <Cards allDrivers={driverFilters}/> : <Cards allDrivers={allDrivers}/>}
         </div>
         ) : (

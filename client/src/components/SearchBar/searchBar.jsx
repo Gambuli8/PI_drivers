@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import style from './searchBar.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { GetDriverByName } from '../../redux/Actions/Actions';
 
-function Searchbar() {
+function Searchbar({setCurrentPage}) {
 
-  const dispatch = useDispatch();
   const [name, setName] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +25,7 @@ function Searchbar() {
       dispatch(GetDriverByName(name));
       setName("");
       navigate(`/home`);
+      // setCurrentPage(1);
     }
   };
 

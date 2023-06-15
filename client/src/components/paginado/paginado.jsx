@@ -15,9 +15,9 @@ import style from './paginado.module.css';
             <ul className={style.ul}>
                 {pageNumbers &&
                     pageNumbers.map(number => (
-                        <li key={number} className={style.li}>
-                        <a onClick={() => paginate(number)}>{number}</a>
-                        </li>
+                        <button key={number} className={style.btn}>
+                        <a className={style.a} onClick={() => paginate(number)}>{number}</a>
+                        </button>
                     ))}
             </ul>
         </div>
