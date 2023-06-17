@@ -19,7 +19,6 @@ function Home() {
     dispatch(GetAllDrivers())
   }, [])
 
-
   return (
     <div className={style.container}>
     {allDrivers.length ? (

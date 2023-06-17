@@ -37,6 +37,7 @@ const postDriversH = async (req, res) => {
     Imagen,
     Fecha_de_Nacimiento,
     Descripcion,
+    Escuderias,
   } = req.body;
   try {
     await newDriverDB(
@@ -45,7 +46,8 @@ const postDriversH = async (req, res) => {
       Nacionalidad,
       Imagen,
       Fecha_de_Nacimiento,
-      Descripcion
+      Descripcion,
+      Escuderias
     );
     res.status(200).send("Creado con exitos");
   } catch (error) {

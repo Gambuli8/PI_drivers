@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Filter, GetFilterCreatedDriver, GetFilterByTeam, GetAllTeams, FilterByDob } from '../../redux/Actions/Actions';
 import style from './filter.module.css';
 
-function Filters() {
+function Filters({setCurrentPage}) {
 
     const dispatch = useDispatch();
     const allTeams = useSelector((state) => state.allTeams);

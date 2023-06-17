@@ -23,7 +23,7 @@ const Create = () => {
     Imagen: '',
     Fecha_de_Nacimiento:'',
     Descripcion: '',
-    Escuderias: {},
+    Escuderias: [],
   });
 
 
@@ -40,6 +40,13 @@ const Create = () => {
     }, e.target.name);
   };
 
+  const handlerSelectChange = (e) => {
+      setInput({
+        ...input,
+        Escuderias: [...input.Escuderias, e.target.value],
+      })
+  }
+
   // esta funcion se encarga de enviar los datos al back
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +60,7 @@ const Create = () => {
     Imagen: '',
     Fecha_de_Nacimiento:'',
     Descripcion: '',
-    Escuderias: '',
+    Escuderias: [],
   })
 
   //! VALIDACIONES
@@ -161,7 +168,7 @@ const Create = () => {
 
   return (
       <div>
-        {console.log(allDrivers4)}
+        {console.log(Errors)}
       <Link to="/home"><button className={style.btnHome}>Volver</button></Link>
     <div className={style.form_container}>
       <h1>Crear Piloto</h1>
@@ -194,9 +201,12 @@ const Create = () => {
         </div>
           <label>Escuderias</label>
         <div className={style.divteams}>
-          {allDrivers4.map((team) => {
-             <input type="checkbox" value={team}/>
-          })}
+          {allDrivers4.map((team, index) => (
+            <div className={style.divInput} key={index}>
+            <input name='Escuderias' type="checkbox" onChange={handlerSelectChange} value={team}/>
+            <label htmlFor={team}>{team}</label>
+            </div>
+          ))}
         </div>
       <button className={style.button_submit} type='submit' name='submit'>Crear</button>
       </form>

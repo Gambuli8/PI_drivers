@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { GetDriverByName } from '../../redux/Actions/Actions';
 
-function Searchbar({setCurrentPage}) {
+function Searchbar() {
 
   const [name, setName] = useState("");
   const dispatch = useDispatch();
@@ -25,7 +25,6 @@ function Searchbar({setCurrentPage}) {
       dispatch(GetDriverByName(name));
       setName("");
       navigate(`/home`);
-      // setCurrentPage(1);
     }
   };
 

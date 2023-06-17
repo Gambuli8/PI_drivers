@@ -15,6 +15,7 @@ let inicialState = {
   newDrivers: [],
   driverFilters: [],
   filters: false,
+  currentPage: 1,
 };
 
 function rootReducer(state = inicialState, action) {
