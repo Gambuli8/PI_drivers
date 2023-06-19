@@ -15,15 +15,15 @@ let inicialState = {
   newDrivers: [],
   driverFilters: [],
   filters: false,
-  currentPage: 1,
 };
-
+console.log(inicialState.driverFilters);
 function rootReducer(state = inicialState, action) {
   switch (action.type) {
     case GET_ALL_DRIVERS:
       return {
         ...state,
         allDrivers: action.payload,
+        driverFilters: action.payload,
       };
     case GET_NEW_DRIVER:
       return {
@@ -38,8 +38,8 @@ function rootReducer(state = inicialState, action) {
     case GET_DRIVER_BY_NAME:
       return {
         ...state,
-        allDrivers: action.payload,
         driverFilters: action.payload,
+        filters: true,
       };
     case FILTERS:
       if (action.payload === "A-Z") {

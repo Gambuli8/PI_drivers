@@ -4,9 +4,9 @@ import style from './landing.module.css';
 
 function landing() {
   return (
-    <div>
+    <div className={style.container}>
       <h1 className={style.h1}>Bienvenido a nuestra pagina de Pilotos</h1>
-      <Link to='/home' className={style.btn}><button>Entrar</button></Link>
+      <Link to='/home'><button className={style.btn}>Entrar</button></Link>
     </div>
   )
 }

@@ -6,35 +6,34 @@ import { GetDriverByName } from '../../redux/Actions/Actions';
 
 function Searchbar() {
 
-  const [name, setName] = useState("");
   const dispatch = useDispatch();
+  const [name, setName] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(GetDriverByName(name));
-  }, []);
+    dispatch(GetDriverByName(name))
+  }, [dispatch, name]);
 
   const handlerinputChange = (e) => {
     e.preventDefault();
-      setName(e.target.value);
+    setName(e.target.value);
   };
 
   const handlerSubmit = (e) => {
     e.preventDefault();
     if (name) {
       dispatch(GetDriverByName(name));
-      setName("");
       navigate(`/home`);
     }
   };
 
   return (
     <div className={style.container}>
-      {/* {console.log(name)} */}
+      {console.log(name)}
     <div className={style.input_group}>
         <input onChange={(e) => handlerinputChange(e)} placeholder='Buscar...' type="text" name='text' className={style.input} autoComplete='off' value={name} />
     </div>
-        <button type="submit" onClick={handlerSubmit} className={style.button}>Buscar</button>
+        <button type="submit" onClick={e => handlerSubmit(e)} className={style.button}>Buscar</button>
     </div>
 
   )

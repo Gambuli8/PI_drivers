@@ -14,7 +14,6 @@ function Detail() {
     setDrivers(allDrivers.find((driver) => driver.Nombre === name));
   }, []);
 
-
   return (
     <div>
       {console.log(drivers)}
@@ -29,7 +28,7 @@ function Detail() {
                 <h3 className={style.info}><p>Apellido:</p>{drivers?.Apellido}</h3>
                 <h3 className={style.info}><p>Nacionalidad:</p>{drivers?.Nacionalidad}</h3>
                 <h3 className={style.info}> <p>Fecha de nacimiento:</p>{drivers?.Fecha_de_Nacimiento}</h3>
-                <h3 className={style.info}><p>Escuderias:</p> {drivers?.Escuderias}</h3>
+                <h3 className={style.info}><p>Escuderias:</p> {drivers.Escuderias}</h3>
                 <h3 className={style.info}> <p>Descripcion:</p>{drivers?.Descripcion}</h3>
                 <img className={style.image} src={drivers?.Imagen} alt="Imagen no disponible" />
             </div>

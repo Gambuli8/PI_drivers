@@ -168,7 +168,7 @@ const Create = () => {
 
   return (
       <div>
-        {console.log(Errors)}
+        {console.log(input)}
       <Link to="/home"><button className={style.btnHome}>Volver</button></Link>
     <div className={style.form_container}>
       <h1>Crear Piloto</h1>

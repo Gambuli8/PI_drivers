@@ -30,6 +30,13 @@ const getDriverByNameDB = async (name) => {
       where: {
         Nombre: name,
       },
+      include: {
+        model: Team,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
     });
     const DriversApi = await axios.get(
       ` http://localhost:5000/drivers?name.forename=${name}`
@@ -40,7 +47,7 @@ const getDriverByNameDB = async (name) => {
         Apodo: driver.driverRef,
         Abrebiacion: driver.code,
         Numero: driver.number,
-        Nombre: driver.name.forename,
+        Nombre: driver.name.forename.toLowerCase(),
         Apellido: driver.name.surname,
         Imagen: driver.image.url,
         Fecha_de_Nacimiento: driver.dob,
@@ -60,7 +67,8 @@ const newDriverDB = async (
   Nacionalidad,
   Imagen,
   Fecha_de_Nacimiento,
-  Descripcion
+  Descripcion,
+  Escuderias
 ) => {
   const newDriver = await Driver.create({
     Nombre,
@@ -70,8 +78,10 @@ const newDriverDB = async (
     Fecha_de_Nacimiento,
     Descripcion,
   });
-  const teamDb = Team.findAll();
-  await newDriver.addTeam(teamDb);
+  let teamDb = await Team.findAll({
+    where: { name: Escuderias },
+  });
+  await newDriver.addTeams(teamDb);
   return newDriver;
 };
 
