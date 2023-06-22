@@ -38,7 +38,7 @@ function Detail() {
                 <h3 className={style.info}><p>Nacionalidad:</p>{drivers?.Nacionalidad}</h3>
                 <h3 className={style.info}> <p>Fecha de nacimiento:</p>{drivers?.Fecha_de_Nacimiento}</h3>
                 {drivers?.Escuderias ? (
-                  <h3 className={style.info}><p>Escuderias:</p>{teamsArray(drivers.Escuderias)}</h3>
+                  <h3 className={style.info}><p>Escuderias:</p>{teamsArray(drivers?.Escuderias)}</h3>
                 ) : (
                   drivers?.Teams && (
                     <h3 className={style.info}><p>Escuderias: </p>{teamsArray(drivers?.Teams)}</h3>

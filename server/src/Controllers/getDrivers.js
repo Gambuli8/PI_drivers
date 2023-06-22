@@ -22,12 +22,11 @@ const getAllDriver = async () => {
       Apellido: driver.name.surname,
       Fecha_de_Nacimiento: driver.dob,
       Nacionalidad: driver.nationality,
-      Escuderias: driver.teams ? driver?.teams : driver?.Teams,
+      Escuderias: driver.teams,
       Imagen: driver.image.url,
       Descripcion: driver.description,
     };
   });
-  console.log(getAllDriver);
 
   const response = [...allDriver, ...DriversFilter];
   return response;
@@ -50,29 +49,26 @@ const getDriverByNameDB = async (name) => {
     const DriversApi = await axios.get(
       ` http://localhost:5000/drivers?name.forename=${name}`
     );
-    const response = [...driverDB, ...DriversApi];
-
-    const DriversFilter = response.data.map((driver) => {
+    const DriversFilter = DriversApi.data.map((driver) => {
       return {
         id: driver.id,
         Apodo: driver.driverRef,
         Abrebiacion: driver.code,
         Numero: driver.number,
-        Nombre: driver.name.forename,
+        Nombre: driver.name.forename.toLowerCase(),
         Apellido: driver.name.surname,
         Imagen: driver.image.url,
         Fecha_de_Nacimiento: driver.dob,
         Nacionalidad: driver.nationality,
-        Escuderias: driver?.teams
-          ? driver.teams
-          : driver.Teams.map((team) => team.name),
+        Escuderias: driver.teams,
         Descripcion: driver.description,
       };
     });
 
-    console.log(DriversFilter.data.Escuderias);
+    const response = [...driverDB, ...DriversFilter];
+
     if (name) {
-      let filterDriver = DriversFilter.filter((driver) =>
+      let filterDriver = response.filter((driver) =>
         driver.Nombre.toLowerCase().includes(name.toLowerCase())
       );
       if (filterDriver.length) {
@@ -80,7 +76,7 @@ const getDriverByNameDB = async (name) => {
       }
       throw new Error("no se encontro el piloto con ese nombre");
     } else {
-      return DriversFilter;
+      return response;
     }
   }
 };
