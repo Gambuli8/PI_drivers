@@ -32,7 +32,7 @@ function Cards({allDrivers}) {
             dob= {driver?.Fecha_de_Nacimiento}
             image={driver?.Imagen}
             description= {driver?.Descripcion}
-            teams= {driver?.Escuderias}
+            teams= {driver?.Escuderias ? driver.Escuderias : driver.Teams.map(team => team.name).join(', ')}
             />
           ))}
         </div>

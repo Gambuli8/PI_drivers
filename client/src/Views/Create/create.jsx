@@ -45,6 +45,10 @@ const Create = () => {
         ...input,
         Escuderias: [...input.Escuderias, e.target.value],
       })
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      }, e.target.name);
   }
 
   // esta funcion se encarga de enviar los datos al back
@@ -54,121 +58,121 @@ const Create = () => {
   };
 
   const [Errors, setErrors] = useState({
-    Nombre: '',
-    Apellido: '',
-    Nacionalidad: '',
-    Imagen: '',
-    Fecha_de_Nacimiento:'',
-    Descripcion: '',
-    Escuderias: [],
+    Nombre: 'Nombre Requerido',
+    Apellido: 'Apellido Requerido',
+    Nacionalidad: 'Nacionalidad Requerido',
+    Imagen: 'Imagen Requerida',
+    Fecha_de_Nacimiento:'Fecha de nacimiento Requerida',
+    Descripcion: 'Descripcion Requerida',
+    Escuderias: 'Minimo 1 Escuderia Requerida',
   })
 
   //! VALIDACIONES
   const validate = (input, name) => {
     if(name === 'Nombre') {
-      if (input.name !== '') {
+      if (input.Nombre !== '') {
         setErrors({
         ...Errors,
-          [name]: '',
+          Nombre: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: 'Nombre requerido',
+          Nombre: 'Nombre Requerido',
         });
+        return;
       };
-      return;
-    };
-    if(name === 'Apellido') {
-      if (input.name !== '') {
+    }
+    else if(name === 'Apellido') {
+      if (input.Apellido !== '') {
         setErrors({
         ...Errors,
-          [name]: '',
+          Apellido: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: 'Apellido requerido',
+          Apellido: 'Apellido requerido',
         });
+        return;
       };
-      return;
-    };
-    if(name === 'Nacionalidad') {
-      if (input.name !== '') {
+    }
+    else if(name === 'Nacionalidad') {
+      if (input.Nacionalidad !== '') {
         setErrors({
         ...Errors,
-          [name]: '',
+          Nacionalidad: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: 'Nacionalidad requerida',
+          Nacionalidad: 'Nacionalidad requerida',
         });
+        return;
       };
-      return;
-    };
-    if(name === 'Fecha_de_Nacimiento') {
-      if (input.name !== '') {
+    }
+    else if(name === 'Fecha_de_Nacimiento') {
+      if (input.Fecha_de_Nacimiento !== '') {
         setErrors({
         ...Errors,
-          [name]: '',
+          Fecha_de_Nacimiento: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: 'Fecha de nacimiento requerida',
+          Fecha_de_Nacimiento: 'Fecha de nacimiento requerida',
         });
+        return;
       };
-      return;
-    };
-    if(name === 'Imagen') {
-      if (input.name !== '') {
+    }
+    else if(name === 'Imagen') {
+      if (input.Imagen !== '') {
         setErrors({
         ...Errors,
-          [name]: '',
+          Imagen: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: 'Imagen requerida',
+          Imagen: 'Imagen requerida',
         });
+        return;
       };
-      return;
-    };
-    if(name === 'Descripcion') {
-      if (input.name !== '') {
+    }
+    else if(name === 'Descripcion') {
+      if (input.Descripcion !== '') {
         setErrors({
         ...Errors,
-          [name]: '',
+          Descripcion: 'Descripcion requerida',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: 'Descripcion requerida',
+          Descripcion: '',
         });
+        return;
       };
-      return;
-    };
-    if(name === 'Escuderias') {
-      if (input.name !== '') {
+    }
+    else if(name === 'Escuderias') {
+      if (input.Escuderias !== '') {
         setErrors({
         ...Errors,
-          [name]: '',
+          Escuderias: '',
         });
       } else {
         setErrors({
         ...Errors,
-          [name]: 'Escuderia requerida',
+          Escuderias: 'Minimo 1 Escuderia Requerida',
         });
+        return;
       };
-      return;
     };
 };
 
 
   return (
       <div>
-        {console.log(input)}
+        {console.log(Errors)}
       <Link to="/home"><button className={style.btnHome}>Volver</button></Link>
     <div className={style.form_container}>
       <h1>Crear Piloto</h1>
@@ -181,6 +185,7 @@ const Create = () => {
         <div className={style.inputdiv}>
           <label>Apellido:</label>
           <input type="text" name='Apellido' onChange={handlerChange}placeholder={Errors.Apellido}/>
+
         </div>
         <div className={style.inputdiv}>
           <label>Nacionalidad:</label>
@@ -208,6 +213,7 @@ const Create = () => {
             </div>
           ))}
         </div>
+          <p className={style.errorTeams}>{Errors.Escuderias}</p>
       <button className={style.button_submit} type='submit' name='submit'>Crear</button>
       </form>
     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import NavBar from '../../components/NavBar/navbar';
 import Cards from '../../components/Cards/cards';
 import Card from '../../components/Card/card';
-import { GetAllDrivers, Filter } from '../../redux/Actions/Actions';
+import { GetAllDrivers, Filter, GetDriverByName } from '../../redux/Actions/Actions';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './home.module.css';
 import Filters from '../../components/Filters/filters';
@@ -15,15 +15,29 @@ function Home() {
   const driverFilters = useSelector((state) => state.driverFilters);
   const filters = useSelector((state) => state.filters);
 
+
+  const [searchString, setSearchString] = useState('');
+
   useEffect(() =>{
-    dispatch(GetAllDrivers())
-  }, [])
+    if(!allDrivers.length){
+      dispatch(GetAllDrivers());
+    }
+  }, [dispatch, allDrivers]);
+
+  const handlerChange = (e) => {
+    setSearchString(e.target.value);
+  };
+
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    dispatch(GetDriverByName(searchString));
+  }
 
   return (
     <div className={style.container}>
     {allDrivers.length ? (
         <div>
-        <NavBar/>
+        <NavBar handlerSubmit={handlerSubmit} handlerChange={handlerChange}/>
         <Filters/>
         {filters? <Cards allDrivers={driverFilters}/> : <Cards allDrivers={allDrivers}/>}
         </div>

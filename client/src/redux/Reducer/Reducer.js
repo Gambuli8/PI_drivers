@@ -38,8 +38,7 @@ function rootReducer(state = inicialState, action) {
     case GET_DRIVER_BY_NAME:
       return {
         ...state,
-        driverFilters: action.payload,
-        filters: true,
+        allDrivers: action.payload,
       };
     case FILTERS:
       if (action.payload === "A-Z") {

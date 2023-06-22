@@ -23,7 +23,6 @@ const getDriversByNameH = async (req, res) => {
       res.status(200).json(allDriverName);
     }
   } catch (error) {
-    alert(error.message);
     res.status(400).json(error.message);
   }
 };
